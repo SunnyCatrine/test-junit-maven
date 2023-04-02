@@ -1,18 +1,22 @@
 package com.cat.junit.service;
 
 import com.cat.junit.entity.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//@TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class UserServiceTest {
 
     UserService userService;
+
+    @BeforeAll
+    static void setSomePropertiesForAllTests() {
+        System.out.println("Before all");
+    }
 
 
     @BeforeEach
@@ -42,5 +46,10 @@ class UserServiceTest {
     @AfterEach
     void someCleanActions() {
         System.out.println("AfterEach:" + this);
+    }
+
+    @AfterAll
+    static void someCleanActionsForAllTests() {
+        System.out.println("After all:");
     }
 }
