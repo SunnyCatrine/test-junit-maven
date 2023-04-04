@@ -8,22 +8,19 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//@TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
-class UserServiceTest {
-
+@TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
+public class UserServiceTest {
     UserService userService;
 
     @BeforeAll
-    static void setSomePropertiesForAllTests() {
-        System.out.println("Before all");
+    void setSomePropertiesForAllTests() {
+        System.out.println("Before all:" + this);
     }
-
 
     @BeforeEach
     void setUserService() {
         System.out.println("Before Each:" + this);
         userService = new UserService();
-
     }
 
     @Test
@@ -49,7 +46,7 @@ class UserServiceTest {
     }
 
     @AfterAll
-    static void someCleanActionsForAllTests() {
-        System.out.println("After all:");
+    void someCleanActionsForAllTests() {
+        System.out.println("After all:" + this);
     }
 }
