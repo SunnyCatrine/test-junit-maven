@@ -11,23 +11,23 @@ import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import java.io.PrintWriter;
 
 public class TestLauncher {
-
     public static void main(String[] args) {
         Launcher launcher = LauncherFactory.create();
+
 //        launcher.registerLauncherDiscoveryListeners();
+        SummaryGeneratingListener listener = new SummaryGeneratingListener();
+//        launcher.registerTestExecutionListeners(listener);
 
-        SummaryGeneratingListener summaryGeneratingListener = new SummaryGeneratingListener();
-//        launcher.registerTestExecutionListeners(summaryGeneratingListener);
-
-        LauncherDiscoveryRequest launcherDiscoveryRequest = LauncherDiscoveryRequestBuilder
+        LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
                 .request()
-                .selectors(DiscoverySelectors.selectClass(UserServiceTest.class))
+                .selectors(DiscoverySelectors
+                        .selectClass(UserServiceTest.class))
                 .build();
 
-        launcher.execute(launcherDiscoveryRequest, summaryGeneratingListener);
+        launcher.execute(request, listener);
 
         try (PrintWriter printWriter = new PrintWriter(System.out)) {
-            summaryGeneratingListener.getSummary().printTo(printWriter);
+            listener.getSummary().printTo(printWriter);
         }
     }
 }
