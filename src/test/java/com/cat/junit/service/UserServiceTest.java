@@ -27,32 +27,7 @@ public class UserServiceTest {
         userService = new UserService();
     }
 
-    @Test
-    @Tag("getAll")
-    void emptyListIfNoUsers() {
-        System.out.println("EmptyListIfNoUsers:" + this);
-        List<User> userList = userService.getAll();
 
-        assertThat(userList)
-                .as("Have to be empty")
-                .isEmpty();
-//        assertTrue(userList.isEmpty(), "Have to be empty");
-    }
-
-    @Test
-    @Tag("getAll")
-    void sizeIfUsersAdded() {
-        System.out.println("SizeIfUsersAdded:" + this);
-        userService.addUser(new User());
-        userService.addUser(new User());
-        List<User> userList = userService.getAll();
-//        int userListSize = userList.size();
-
-        assertThat(userList)
-                .as("Have to be 2")
-                .hasSize(2);
-//        assertEquals(2, userListSize, "Have to be 2");
-    }
 
     @Test
     @Tag("login")
@@ -71,5 +46,35 @@ public class UserServiceTest {
     @AfterAll
     static void someCleanActionsForAllTests() {
         System.out.println("After all:");
+    }
+
+    @Nested
+    @Tag("getAll")
+    @DisplayName("get all users method's tests")
+    class GetAllTest {
+        @Test
+        void emptyListIfNoUsers() {
+            System.out.println("EmptyListIfNoUsers:" + this);
+            List<User> userList = userService.getAll();
+
+            assertThat(userList)
+                    .as("Have to be empty")
+                    .isEmpty();
+//        assertTrue(userList.isEmpty(), "Have to be empty");
+        }
+
+        @Test
+        void sizeIfUsersAdded() {
+            System.out.println("SizeIfUsersAdded:" + this);
+            userService.addUser(new User());
+            userService.addUser(new User());
+            List<User> userList = userService.getAll();
+//        int userListSize = userList.size();
+
+            assertThat(userList)
+                    .as("Have to be 2")
+                    .hasSize(2);
+//        assertEquals(2, userListSize, "Have to be 2");
+        }
     }
 }
