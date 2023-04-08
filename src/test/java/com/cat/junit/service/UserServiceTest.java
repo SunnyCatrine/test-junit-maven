@@ -10,7 +10,10 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 //@TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
-class UserServiceTest {
+@Tag("userService")
+@Tag("user")
+@Tag("fast")
+public class UserServiceTest {
     private UserService userService;
 
     @BeforeAll
@@ -25,6 +28,7 @@ class UserServiceTest {
     }
 
     @Test
+    @Tag("getAll")
     void emptyListIfNoUsers() {
         System.out.println("EmptyListIfNoUsers:" + this);
         List<User> userList = userService.getAll();
@@ -36,6 +40,7 @@ class UserServiceTest {
     }
 
     @Test
+    @Tag("getAll")
     void sizeIfUsersAdded() {
         System.out.println("SizeIfUsersAdded:" + this);
         userService.addUser(new User());
@@ -50,13 +55,13 @@ class UserServiceTest {
     }
 
     @Test
+    @Tag("login")
     void throwIllegalArgumentExceptionIfUserNameOrPasswordIsNull() {
         assertAll(
                 () -> assertThrows(IllegalArgumentException.class, () -> userService.login("name", null), "password null"),
                 () -> assertThrows(IllegalArgumentException.class, () -> userService.login(null, "password"), "name null")
         );
     }
-
 
     @AfterEach
     void someCleanActions() {
