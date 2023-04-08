@@ -9,13 +9,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
-public class UserServiceTest {
-    UserService userService;
+//@TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
+class UserServiceTest {
+    private UserService userService;
 
     @BeforeAll
-    void setSomePropertiesForAllTests() {
-        System.out.println("Before all:" + this);
+    static void setSomePropertiesForAllTests() {
+        System.out.println("Before all:");
     }
 
     @BeforeEach
@@ -64,7 +64,7 @@ public class UserServiceTest {
     }
 
     @AfterAll
-    void someCleanActionsForAllTests() {
-        System.out.println("After all:" + this);
+    static void someCleanActionsForAllTests() {
+        System.out.println("After all:");
     }
 }
