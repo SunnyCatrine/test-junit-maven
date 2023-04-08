@@ -7,8 +7,7 @@ import org.junit.jupiter.api.*;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 public class UserServiceTest {
@@ -49,6 +48,16 @@ public class UserServiceTest {
                 .hasSize(2);
 //        assertEquals(2, userListSize, "Have to be 2");
     }
+
+    @Test
+    void throwIllegalArgumentExceptionIfUserNameOrPasswordIsNull() {
+        assertAll(
+                "Should throw IllegalArgumentException",
+                () -> assertThrows(IllegalArgumentException.class, () -> userService.login("name", null)),
+                () -> assertThrows(IllegalArgumentException.class, () -> userService.login(null, "password"))
+        );
+    }
+
 
     @AfterEach
     void someCleanActions() {
