@@ -52,9 +52,8 @@ public class UserServiceTest {
     @Test
     void throwIllegalArgumentExceptionIfUserNameOrPasswordIsNull() {
         assertAll(
-                "Should throw IllegalArgumentException",
-                () -> assertThrows(IllegalArgumentException.class, () -> userService.login("name", null)),
-                () -> assertThrows(IllegalArgumentException.class, () -> userService.login(null, "password"))
+                () -> assertThrows(IllegalArgumentException.class, () -> userService.login("name", null), "password null"),
+                () -> assertThrows(IllegalArgumentException.class, () -> userService.login(null, "password"), "name null")
         );
     }
 
