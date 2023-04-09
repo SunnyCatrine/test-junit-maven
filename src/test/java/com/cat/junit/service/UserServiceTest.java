@@ -1,10 +1,16 @@
 package com.cat.junit.service;
 
 import com.cat.junit.entity.User;
+import net.bytebuddy.asm.Advice;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("user")
 @Tag("fast")
 public class UserServiceTest {
+    private static final User EXISTING_USER = User.of("name", "password");
     private UserService userService;
 
     @BeforeAll
@@ -29,12 +36,31 @@ public class UserServiceTest {
 
 
 
-    @Test
-    @Tag("login")
-    void throwIllegalArgumentExceptionIfUserNameOrPasswordIsNull() {
-        assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> userService.login("name", null), "password null"),
-                () -> assertThrows(IllegalArgumentException.class, () -> userService.login(null, "password"), "name null")
+//    @Test
+//    @Tag("login")
+//    void throwIllegalArgumentExceptionIfUserNameOrPasswordIsNull() {
+//        assertAll(
+//                () -> assertThrows(IllegalArgumentException.class, () -> userService.login("name", null), "password null"),
+//                () -> assertThrows(IllegalArgumentException.class, () -> userService.login(null, "password"), "name null")
+//        );
+//    }
+
+    @ParameterizedTest
+    @MethodSource("com.cat.junit.service.UserServiceTest#getArgumentsForLoginTest")
+    void loginParametrizedTest(String login, String password, Optional<User> user, String message) {
+        userService.addUser(EXISTING_USER);
+
+        assertThat(userService.login(login, password))
+                .as(message)
+                .isEqualTo(user);
+
+    }
+
+    static Stream<Arguments> getArgumentsForLoginTest() {
+        return Stream.of(
+                Arguments.of("name", null, Optional.empty(), "password null"),
+                Arguments.of(null, "password", Optional.empty(), "login null"),
+                Arguments.of("name", "password", Optional.of(EXISTING_USER), "existing user")
         );
     }
 
