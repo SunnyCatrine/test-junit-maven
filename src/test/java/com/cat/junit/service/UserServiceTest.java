@@ -24,7 +24,7 @@ public class UserServiceTest {
             .name("name")
             .password("password")
             .build();
-    
+
     private UserService userService;
 
     @BeforeAll
