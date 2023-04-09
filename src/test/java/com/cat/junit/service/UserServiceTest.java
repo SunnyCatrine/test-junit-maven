@@ -20,7 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("user")
 @Tag("fast")
 public class UserServiceTest {
-    private static final User EXISTING_USER = User.of("name", "password");
+    private static final User EXISTING_USER = User.builder()
+            .name("name")
+            .password("password")
+            .build();
+    
     private UserService userService;
 
     @BeforeAll
