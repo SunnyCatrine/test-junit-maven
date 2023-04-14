@@ -48,7 +48,12 @@ public class UserServiceTest {
 //        );
 //    }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "test {index} --- {arguments}")
+//    @CsvFileSource(resources = "/login-test-data.csv", numLinesToSkip = 1)
+//            @CsvSource({
+//                    "name,password",
+//                    "name1,password1"
+//            })
     @MethodSource("com.cat.junit.service.UserServiceTest#getArgumentsForLoginTest")
     void loginParametrizedTest(String login, String password, Optional<User> user, String message) {
         userService.addUser(EXISTING_USER);

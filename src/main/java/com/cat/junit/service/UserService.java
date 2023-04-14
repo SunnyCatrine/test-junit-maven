@@ -19,7 +19,7 @@ public class UserService {
 
     public Optional<User> login(String name, String password) {
         Optional<User> result;
-        if (name == null || password == null) {
+        if (name == null || password == null || name.isEmpty() || password.isEmpty()) {
 //            throw new IllegalArgumentException("Login or Password is null");
             result = Optional.empty();
         } else result = Optional.of(User.builder()
