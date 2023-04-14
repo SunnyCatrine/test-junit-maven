@@ -5,8 +5,7 @@ import net.bytebuddy.asm.Advice;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class UserServiceTest {
         assertThat(userService.login(login, password))
                 .as(message)
                 .isEqualTo(user);
-
     }
 
     static Stream<Arguments> getArgumentsForLoginTest() {
