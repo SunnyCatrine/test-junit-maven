@@ -64,7 +64,9 @@ public class UserServiceTest {
         return Stream.of(
                 Arguments.of("name", null, Optional.empty(), "password null"),
                 Arguments.of(null, "password", Optional.empty(), "login null"),
-                Arguments.of("name", "password", Optional.of(EXISTING_USER), "existing user")
+                Arguments.of("name", "password", Optional.of(EXISTING_USER), "existing user"),
+                Arguments.of("", "password", Optional.empty(), "login is empty"),
+                Arguments.of("name", "", Optional.empty(), "password is empty")
         );
     }
 
