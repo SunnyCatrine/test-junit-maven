@@ -90,7 +90,7 @@ public class UserServiceTest {
     @DisplayName("get all users method's tests")
     class GetAllTest {
         @Test
-        @Disabled("not working (")
+        @Disabled("I am not working correctly. Fix me, please )")
         void emptyListIfNoUsers() {
             System.out.println("EmptyListIfNoUsers:" + this);
             List<User> userList = userService.getAll();
