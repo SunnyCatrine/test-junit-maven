@@ -7,8 +7,10 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -90,14 +92,18 @@ public class UserServiceTest {
     @DisplayName("get all users method's tests")
     class GetAllTest {
         @Test
-        @Disabled("I am not working correctly. Fix me, please )")
+//        @Disabled("I am not working correctly. Fix me, please )")
+//        @Timeout(value = 150, unit = TimeUnit.MILLISECONDS)
         void emptyListIfNoUsers() {
-            System.out.println("EmptyListIfNoUsers:" + this);
-            List<User> userList = userService.getAll();
+            assertTimeout(Duration.ofMillis(170), () -> {
+                System.out.println("EmptyListIfNoUsers:" + this);
+                List<User> userList = userService.getAll();
+                assertThat(userList)
+                        .as("Have to be empty")
+                        .isEmpty();
+            });
 
-            assertThat(userList)
-                    .as("Have to be empty")
-                    .isEmpty();
+
 //        assertTrue(userList.isEmpty(), "Have to be empty");
         }
 
