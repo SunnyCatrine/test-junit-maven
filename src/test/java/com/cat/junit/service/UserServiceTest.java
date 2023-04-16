@@ -101,9 +101,10 @@ public class UserServiceTest {
 //        assertTrue(userList.isEmpty(), "Have to be empty");
         }
 
-        @Test
-        void sizeIfUsersAdded() {
-            System.out.println("SizeIfUsersAdded:" + this);
+//        @Test
+        @RepeatedTest(4)
+        void sizeIfUsersAdded(RepetitionInfo repetitionInfo) {
+            System.out.println(repetitionInfo.getCurrentRepetition() + ") SizeIfUsersAdded: " + this);
             userService.addUser(new User());
             userService.addUser(new User());
             List<User> userList = userService.getAll();
