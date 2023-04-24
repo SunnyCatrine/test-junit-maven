@@ -2,6 +2,7 @@ package com.cat.junit.service;
 
 import com.cat.junit.entity.User;
 import com.cat.junit.extension.ConditionalExecutionExtension;
+import com.cat.junit.extension.ExceptionHandlingExtension;
 import com.cat.junit.extension.LifeCycleExtension;
 import com.cat.junit.extension.PostProcessingExtension;
 import net.bytebuddy.asm.Advice;
@@ -28,7 +29,8 @@ import static org.junit.jupiter.api.Assertions.*;
         {
                 LifeCycleExtension.class,
                 PostProcessingExtension.class,
-                ConditionalExecutionExtension.class
+                ConditionalExecutionExtension.class,
+                ExceptionHandlingExtension.class
         }
 )
 public class UserServiceTest {
