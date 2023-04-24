@@ -2,6 +2,7 @@ package com.cat.junit.service;
 
 import com.cat.junit.entity.User;
 import com.cat.junit.extension.LifeCycleExtension;
+import com.cat.junit.extension.PostProcessingExtension;
 import net.bytebuddy.asm.Advice;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
@@ -23,7 +24,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("user")
 @Tag("fast")
 @ExtendWith(
-        LifeCycleExtension.class
+        {LifeCycleExtension.class,
+                PostProcessingExtension.class}
 )
 public class UserServiceTest {
     private static final User EXISTING_USER = User.builder()
