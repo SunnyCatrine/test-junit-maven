@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 public class PostProcessingExtension implements TestInstancePostProcessor {
     @Override
     public void postProcessTestInstance(Object testInstance, ExtensionContext extensionContext) throws Exception {
-        testInstance.getClass().getDeclaredField("fieldName").set(testInstance, "newFieldValue");
+//        testInstance.getClass().getDeclaredField("fieldName").set(testInstance, "newFieldValue");
 
         System.out.println("postprocessing ");
 
