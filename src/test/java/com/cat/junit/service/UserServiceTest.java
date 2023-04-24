@@ -1,9 +1,11 @@
 package com.cat.junit.service;
 
 import com.cat.junit.entity.User;
+import com.cat.junit.extension.LifeCycleExtension;
 import net.bytebuddy.asm.Advice;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
@@ -20,6 +22,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("userService")
 @Tag("user")
 @Tag("fast")
+@ExtendWith(
+        LifeCycleExtension.class
+)
 public class UserServiceTest {
     private static final User EXISTING_USER = User.builder()
             .name("name")
