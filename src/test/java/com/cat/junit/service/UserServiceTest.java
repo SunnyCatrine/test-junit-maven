@@ -61,6 +61,9 @@ public class UserServiceTest {
     @Test
     void shouldDeleteExistingUser() {
         userService.addUser(EXISTING_USER);
+        int intId = Integer.parseInt(EXISTING_USER.getId());
+
+        Mockito.doReturn(true).when(userDao).delete(intId);
 
         assertThat(userService.delete(EXISTING_USER.getId())).isTrue();
     }
