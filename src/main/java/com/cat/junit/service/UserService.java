@@ -1,5 +1,6 @@
 package com.cat.junit.service;
 
+import com.cat.junit.dao.UserDao;
 import com.cat.junit.entity.User;
 
 import java.util.ArrayList;
@@ -8,6 +9,12 @@ import java.util.Optional;
 
 public class UserService {
     List<User> userList = new ArrayList<>();
+    private UserDao userDao = UserDao.getInstance();
+
+    public boolean delete(String id) {
+        Integer intId = Integer.parseInt(id);
+        return userDao.delete(intId);
+    }
 
     public List<User> getAll() {
         return userList;
