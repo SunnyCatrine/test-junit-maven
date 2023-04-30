@@ -1,5 +1,6 @@
 package com.cat.junit.service;
 
+import com.cat.junit.dao.UserDao;
 import com.cat.junit.entity.User;
 import com.cat.junit.extension.ConditionalExecutionExtension;
 import com.cat.junit.extension.ExceptionHandlingExtension;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
+import org.mockito.junit.MockitoJUnit;
 
 import java.time.Duration;
 import java.util.List;
@@ -39,6 +41,7 @@ public class UserServiceTest {
             .password("password")
             .build();
 
+    private UserDao userDao;
     private UserService userService;
 
     @BeforeAll
@@ -50,6 +53,13 @@ public class UserServiceTest {
     void setUserService() {
         System.out.println("Before Each:" + this);
         userService = new UserService();
+    }
+
+    @Test
+    void shouldDeleteExistingUser() {
+        userService.addUser(EXISTING_USER);
+
+        assertThat(userService.delete(EXISTING_USER.getId())).isEqualTo(true);
     }
 
 
