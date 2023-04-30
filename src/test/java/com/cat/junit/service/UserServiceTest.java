@@ -12,6 +12,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 
 import java.time.Duration;
@@ -32,13 +33,14 @@ import static org.junit.jupiter.api.Assertions.*;
                 LifeCycleExtension.class,
                 PostProcessingExtension.class,
                 ConditionalExecutionExtension.class,
-                ExceptionHandlingExtension.class
+//                ExceptionHandlingExtension.class
         }
 )
 public class UserServiceTest {
     private static final User EXISTING_USER = User.builder()
             .name("name")
             .password("password")
+            .id("1")
             .build();
 
     private UserDao userDao;
@@ -52,14 +54,15 @@ public class UserServiceTest {
     @BeforeEach
     void setUserService() {
         System.out.println("Before Each:" + this);
-        userService = new UserService();
+        this.userDao = Mockito.mock(UserDao.class);
+        this.userService = new UserService(userDao);
     }
 
     @Test
     void shouldDeleteExistingUser() {
         userService.addUser(EXISTING_USER);
 
-        assertThat(userService.delete(EXISTING_USER.getId())).isEqualTo(true);
+        assertThat(userService.delete(EXISTING_USER.getId())).isTrue();
     }
 
 

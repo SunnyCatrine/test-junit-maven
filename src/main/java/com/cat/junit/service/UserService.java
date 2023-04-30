@@ -11,6 +11,10 @@ public class UserService {
     List<User> userList = new ArrayList<>();
     private UserDao userDao = UserDao.getInstance();
 
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     public boolean delete(String id) {
         Integer intId = Integer.parseInt(id);
         return userDao.delete(intId);
