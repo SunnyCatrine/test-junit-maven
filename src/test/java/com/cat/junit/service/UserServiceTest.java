@@ -67,6 +67,10 @@ public class UserServiceTest {
         Mockito.doReturn(true).when(userDao).delete(intId);
 
         assertThat(userService.delete(EXISTING_USER.getId())).isTrue();
+
+        
+        Mockito.verify(userDao, Mockito.times(1)).delete(intId);
+
     }
 
 
