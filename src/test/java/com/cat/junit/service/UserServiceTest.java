@@ -54,7 +54,8 @@ public class UserServiceTest {
     @BeforeEach
     void setUserService() {
         System.out.println("Before Each:" + this);
-        this.userDao = Mockito.mock(UserDao.class);
+//        this.userDao = Mockito.mock(UserDao.class);
+        this.userDao = Mockito.spy(UserDao.getInstance());
         this.userService = new UserService(userDao);
     }
 
