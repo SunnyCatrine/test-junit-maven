@@ -12,6 +12,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 
@@ -66,11 +67,10 @@ public class UserServiceTest {
 
         Mockito.doReturn(true).when(userDao).delete(intId);
 
+        ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
         assertThat(userService.delete(EXISTING_USER.getId())).isTrue();
-
-        
+        assertThat(integerArgumentCaptor.getValue()).isEqualTo(intId);
         Mockito.verify(userDao, Mockito.times(1)).delete(intId);
-
     }
 
 
