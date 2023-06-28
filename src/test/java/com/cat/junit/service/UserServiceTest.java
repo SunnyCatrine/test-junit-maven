@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.*;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Duration;
 import java.util.List;
@@ -34,6 +35,7 @@ import static org.junit.jupiter.api.Assertions.*;
                 LifeCycleExtension.class,
                 PostProcessingExtension.class,
                 ConditionalExecutionExtension.class,
+                MockitoExtension.class
 //                ExceptionHandlingExtension.class
         }
 )
