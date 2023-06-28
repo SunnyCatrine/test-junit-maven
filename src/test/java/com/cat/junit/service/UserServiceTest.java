@@ -12,10 +12,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.*;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -52,6 +49,8 @@ public class UserServiceTest {
     private UserDao userDao;
     @InjectMocks
     private UserService userService;
+    @Captor
+    private ArgumentCaptor<Integer> integerArgumentCaptor;
 
     @BeforeAll
     static void setSomePropertiesForAllTests() {
@@ -73,10 +72,11 @@ public class UserServiceTest {
 
         Mockito.doReturn(true).when(userDao).delete(intId);
 
-        ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+//        ArgumentCaptor<Integer> stringArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
         assertThat(userService.delete(EXISTING_USER.getId())).isTrue();
+
+        Mockito.verify(userDao, Mockito.times(1)).delete(integerArgumentCaptor.capture());
         assertThat(integerArgumentCaptor.getValue()).isEqualTo(intId);
-        Mockito.verify(userDao, Mockito.times(1)).delete(intId);
     }
 
 
