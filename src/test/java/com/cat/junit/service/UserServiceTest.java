@@ -46,6 +46,7 @@ public class UserServiceTest {
             .build();
 
     @Mock
+//            (strictness = Mock.Strictness.LENIENT)
     private UserDao userDao;
     @InjectMocks
     private UserService userService;
@@ -60,17 +61,19 @@ public class UserServiceTest {
     @BeforeEach
     void setUserService() {
         System.out.println("Before Each:" + this);
-        int intId = Integer.parseInt(EXISTING_USER.getId());
-
-        Mockito.doReturn(true).when(userDao).delete(intId);
 //        this.userDao = Mockito.mock(UserDao.class);
 //        this.userDao = Mockito.spy(UserDao.getInstance());
 //        this.userService = new UserService(userDao);
+
     }
+
+
 
     @Test
     void shouldDeleteExistingUser() {
+        int intId = Integer.parseInt(EXISTING_USER.getId());
 
+        Mockito.doReturn(true).when(userDao).delete(intId);
         userService.addUser(EXISTING_USER);
 
 //        ArgumentCaptor<Integer> stringArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
