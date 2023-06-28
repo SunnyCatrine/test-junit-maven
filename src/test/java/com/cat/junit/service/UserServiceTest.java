@@ -13,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -46,7 +48,9 @@ public class UserServiceTest {
             .id("1")
             .build();
 
+    @Mock
     private UserDao userDao;
+    @InjectMocks
     private UserService userService;
 
     @BeforeAll
@@ -58,8 +62,8 @@ public class UserServiceTest {
     void setUserService() {
         System.out.println("Before Each:" + this);
 //        this.userDao = Mockito.mock(UserDao.class);
-        this.userDao = Mockito.spy(UserDao.getInstance());
-        this.userService = new UserService(userDao);
+//        this.userDao = Mockito.spy(UserDao.getInstance());
+//        this.userService = new UserService(userDao);
     }
 
     @Test
