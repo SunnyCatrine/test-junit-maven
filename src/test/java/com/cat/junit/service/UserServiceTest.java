@@ -60,6 +60,9 @@ public class UserServiceTest {
     @BeforeEach
     void setUserService() {
         System.out.println("Before Each:" + this);
+        int intId = Integer.parseInt(EXISTING_USER.getId());
+
+        Mockito.doReturn(true).when(userDao).delete(intId);
 //        this.userDao = Mockito.mock(UserDao.class);
 //        this.userDao = Mockito.spy(UserDao.getInstance());
 //        this.userService = new UserService(userDao);
@@ -67,16 +70,14 @@ public class UserServiceTest {
 
     @Test
     void shouldDeleteExistingUser() {
-        userService.addUser(EXISTING_USER);
-        int intId = Integer.parseInt(EXISTING_USER.getId());
 
-        Mockito.doReturn(true).when(userDao).delete(intId);
+        userService.addUser(EXISTING_USER);
 
 //        ArgumentCaptor<Integer> stringArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
         assertThat(userService.delete(EXISTING_USER.getId())).isTrue();
 
         Mockito.verify(userDao, Mockito.times(1)).delete(integerArgumentCaptor.capture());
-        assertThat(integerArgumentCaptor.getValue()).isEqualTo(intId);
+        assertThat(integerArgumentCaptor.getValue()).isEqualTo(1);
     }
 
 
