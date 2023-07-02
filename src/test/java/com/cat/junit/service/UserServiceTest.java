@@ -88,7 +88,13 @@ public class UserServiceTest {
         Mockito.verify(userDao, Mockito.times(1)).delete(integerArgumentCaptor.capture());
         assertThat(integerArgumentCaptor.getValue()).isEqualTo(1);
     }
-    
+
+    @Test
+    void falseIfDeleteNoExistingUser() {
+        Mockito.doReturn(false).when(userDao).delete(2);
+        assertThat(userService.delete("2")).isFalse();
+    }
+
 //    @Test
 //    @Tag("login")
 //    void throwIllegalArgumentExceptionIfUserNameOrPasswordIsNull() {
