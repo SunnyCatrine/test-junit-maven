@@ -36,6 +36,7 @@ public class UserService {
         } else result = Optional.of(User.builder()
                 .name(name)
                 .password(password)
+                .id("1")
                 .build());
         return result;
     }
