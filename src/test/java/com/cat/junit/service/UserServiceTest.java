@@ -6,6 +6,7 @@ import com.cat.junit.extension.ConditionalExecutionExtension;
 import com.cat.junit.extension.ExceptionHandlingExtension;
 import com.cat.junit.extension.LifeCycleExtension;
 import com.cat.junit.extension.PostProcessingExtension;
+import lombok.experimental.StandardException;
 import net.bytebuddy.asm.Advice;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
@@ -87,9 +88,7 @@ public class UserServiceTest {
         Mockito.verify(userDao, Mockito.times(1)).delete(integerArgumentCaptor.capture());
         assertThat(integerArgumentCaptor.getValue()).isEqualTo(1);
     }
-
-
-
+    
 //    @Test
 //    @Tag("login")
 //    void throwIllegalArgumentExceptionIfUserNameOrPasswordIsNull() {
