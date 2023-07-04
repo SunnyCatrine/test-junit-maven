@@ -36,5 +36,3 @@ replay_pid*
 #release files
 *.releaseBackup
 release.properties
-
-
